@@ -29,7 +29,8 @@
                 <label class="mb-1" for="citySearch"><h2>Search for a City:</h2></label>
                 <input type="text" class="form-control" id="citySearch" placeholder="Enter a city">
               </div>
-              <button type="submit" class="btn btn-primary btn-block w-100 mb-4">Search
+              <button id="search-btn" type="submit" class="btn btn-primary btn-block w-100 mb-4">
+                Search
                 <i class="fas fa-search"></i>
               </button>
             </form>
@@ -41,13 +42,20 @@
             </div>
             <div class="history-container row">
               <div class="history-item col-12">
-                <button class="btn btn-secondary col-12">City</button>
+                <button 
+                  id="placeholder-btn" 
+                  disabled="true"
+                  class="btn btn-close-white col-12"
+                  >Previous searches will appear here </button>
+                <!-- <button class="btn btn-secondary col-12">City</button> -->
               </div>
             </div>
           </div>
         </div>
-        <div class="col">
-          Weather
+        <div class="col search results">
+          <div id="placeholder-text-div" class="h-100 d-flex align-items-center justify-content-center">
+            <h2 id="placeholder-text-h2">Search for a city to get started!</h2>
+          </div>
         </div>
       </div>
     </div>
