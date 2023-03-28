@@ -1,0 +1,14 @@
+body, li, ul, ol, p, h1, h2, h3, h4, h5, h6, form, 
+fieldset, legend, input, textarea, select, button,
+blockquote, th, td, dl, dt, dd, img, pre, hr, table,
+caption, div, span, object, iframe, header, footer,
+nav, section, article, aside, figure, figcaption,
+details, summary, menu, menuitem, time, mark, audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
