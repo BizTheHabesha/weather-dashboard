@@ -51,6 +51,7 @@ N/A
  - Jquery UI: [https://jqueryui.com/](https://jqueryui.com/)
  - Bootstrap: [https://getbootstrap.com/](https://getbootstrap.com/)
  - W3Schools: [https://www.w3schools.com/](https://www.w3schools.com/)
+ - MDB: [https://mdbootstrap.com/](https://mdbootstrap.com/)
 
 [Back To The Top](#weather-dashboard)
 
