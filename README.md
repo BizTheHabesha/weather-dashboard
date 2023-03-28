@@ -59,7 +59,7 @@ N/A
 
 ## License
 
-No liscense.
+MIT License Copyright (c) 2023 Bisrat Gebrekidan
 
 [Back To The Top](#weather-dashboard)
 
