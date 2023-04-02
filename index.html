@@ -20,9 +20,9 @@
     </div>
   </header>
   <main>
-    <div class="container">
+    <div class="container p-0">
       <div class="row">
-        <div class="col-4">
+        <div class="col-3">
           <div class="search">
             <form>
               <div class="form-group mb-2">
@@ -52,7 +52,48 @@
             </div>
           </div>
         </div>
-        <div class="col search results">
+        <div class="col container search-results">
+          <div id="current-weather-card" class="row container">
+            <h2 class="city-date">CITY DATE <i class="fa-solid fa-cloud"></i></h2>
+            <h4 class="temp">Temp: TEMP</h4>
+            <h4 class="wind">Wind: WIND</h4>
+            <h4 class="humidity">Humidity: HUMIDITY</h4>
+          </div>
+          <div id="forecast-weather-cards" class="container row">
+            <div id="forecast-weather-card-title" class="pb-2 row">
+              <h2>5-Day Forecast:</h2>
+            </div>
+            <div id="forecast-weather-card-1" class="container forecast-card col-sm">
+              <h4>DATE <i class="fa-solid fa-cloud"></i></h4>
+              <h5>Temp: TEMP</h5>
+              <h5>Wind: WIND</h5>
+              <h5>Humidity: HUMIDITY</h5>
+            </div>
+            <div id="forecast-weather-card-2" class="container forecast-card col-sm">
+              <h4>DATE <i class="fa-solid fa-cloud"></i></h4>
+              <h5>Temp: TEMP</h5>
+              <h5>Wind: WIND</h5>
+              <h5>Humidity: HUMIDITY</h5>
+            </div>
+            <div id="forecast-weather-card-3" class="container forecast-card col-sm">
+              <h4>DATE <i class="fa-solid fa-cloud"></i></h4>
+              <h5>Temp: TEMP</h5>
+              <h5>Wind: WIND</h5>
+              <h5>Humidity: HUMIDITY</h5>
+            </div>
+            <div id="forecast-weather-card-4" class="container forecast-card col-sm">
+              <h4>DATE <i class="fa-solid fa-cloud"></i></h4>
+              <h5>Temp: TEMP</h5>
+              <h5>Wind: WIND</h5>
+              <h5>Humidity: HUMIDITY</h5>
+            </div>
+            <div id="forecast-weather-card-5" class="container forecast-card col-sm">
+              <h4>DATE <i class="fa-solid fa-cloud"></i></h4>
+              <h5>Temp: TEMP</h5>
+              <h5>Wind: WIND</h5>
+              <h5>Humidity: HUMIDITY</h5>
+            </div>
+          </div>
           <div id="placeholder-text-div" class="h-100 d-flex align-items-center justify-content-center">
             <h2 id="placeholder-text-h2">Search for a city to get started!</h2>
           </div>

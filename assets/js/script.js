@@ -4,6 +4,13 @@ const APIKEY = 'd6d727c8c68c5cd31db30ad289ac8254';
 const LIMIT = '5';
 // Wrap code in a call to jQuery so all elments on the page will load before we do anything
 $(function(){
+    let weatherSearchHistory = []
+    // if search history is stored locally
+    if(localStorage.getItem('weatherSearchHistory')){
+        for(let searchItem of localStorage.getItem('weatherSearchHistory')){
+            weatherSearchHistory.push(searchItem);
+        }
+    }
     $('#search-btn').click(function (e) { 
         e.preventDefault();
         var userSearchedCity = $('#citySearch').val();
@@ -24,9 +31,31 @@ $(function(){
                 // get 5 day forecast from Open Weather Map using lat, long, and the apikey
                 $.ajax({
                     type: 'GET',
-                    url: `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKEY}`
+                    url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKEY}`,
+                    data: {
+                        units: 'imperial'
+                    }
                 }).then(function(response){
+                    console.log('--- current ---');
                     console.log(response);
+                    $('#current-weather-card').css('display', 'flex');
+                    $('.city-date').text(`Weather in ${userSearchedCity} on ${dayjs().format('M/DD/YYYY')}`)
+                    $('#current-weather-card').children('.temp').text(`Temp: ${response['main']['temp']} °F`)
+                    $('#current-weather-card').children('.wind').text(`Wind: ${response['wind']['speed']} MPH`)
+                    $('#current-weather-card').children('.humidity').text(`Humidity: ${response['main']['humidity']} %`)
+                });
+                $.ajax({ 
+                    type: 'GET',
+                    url: `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKEY}`,
+                    data: {
+                        units: 'imperial'
+                    }
+                }).then(function(response){
+                    console.log('--- forecast ---');
+                    console.log(response);
+                    $('#placeholder-text-h2').css('display', 'none');
+                    $('.forecast-card').css('display', 'unset');
+                    $('#forecast-weather-card-title').css('display', 'unset');
                 });
             });
         }else{
