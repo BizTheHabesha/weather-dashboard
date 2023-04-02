@@ -14,6 +14,7 @@ $(function(){
     $('#search-btn').click(function (e) { 
         e.preventDefault();
         var userSearchedCity = $('#citySearch').val();
+        userSearchedCity = userSearchedCity.charAt(0).toUpperCase() + userSearchedCity.slice(1).toLowerCase();
         // get
         if(userSearchedCity){
             $.ajax({
@@ -54,8 +55,15 @@ $(function(){
                     console.log('--- forecast ---');
                     console.log(response);
                     $('#placeholder-text-h2').css('display', 'none');
-                    $('.forecast-card').css('display', 'unset');
                     $('#forecast-weather-card-title').css('display', 'unset');
+                    $('.forecast-card').css('display', 'unset');
+                    for(let card of $('.forecast-card')){
+                        cardID = Number($(card).attr('id').replace('forecast-weather-card-',''));
+                        $(card).children('.date').text(dayjs().add(cardID, 'day').format('M/DD/YYYY'));
+                        $(card).children('.temp').text(`Temp: ${Math.round(response['list'][(cardID*7)-3]['main']['temp'])} °F`)
+                        $(card).children('.wind').text(`Wind: ${response['list'][(cardID*7)-3]['wind']['speed']} MPH`)
+                        $(card).children('.humidity').text(`Humidity: ${response['list'][(cardID*7)-3]['main']['humidity']} %`)
+                    }
                 });
             });
         }else{
