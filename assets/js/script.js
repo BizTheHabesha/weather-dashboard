@@ -29,14 +29,33 @@ $(function(){
                 let lon = String(Number(response[1]['lon']).toFixed(2));
                 console.log('lat:'+lat + ' lon:' + lon);
                 // get 5 day forecast from Open Weather Map using lat, long, and the apikey
+                $.ajax({
+                    type: 'GET',
+                    url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKEY}`,
+                    data: {
+                        units: 'imperial'
+                    }
+                }).then(function(response){
+                    console.log('--- current ---');
+                    console.log(response);
+                    $('#current-weather-card').css('display', 'flex');
+                    $('.city-date').text(`Weather in ${userSearchedCity} on ${dayjs().format('M/DD/YYYY')}`)
+                    $('#current-weather-card').children('.temp').text(`Temp: ${response['main']['temp']} °F`)
+                    $('#current-weather-card').children('.wind').text(`Wind: ${response['wind']['speed']} MPH`)
+                    $('#current-weather-card').children('.humidity').text(`Humidity: ${response['main']['humidity']} %`)
+                });
                 $.ajax({ 
                     type: 'GET',
-                    url: `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKEY}`
+                    url: `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKEY}`,
+                    data: {
+                        units: 'imperial'
+                    }
                 }).then(function(response){
-                    weatherSearchHistory.push(userSearchedCity);
-                    $('#placeholder-text-h2').css('display', 'none');
-                    console.log(response['list'][4])
+                    console.log('--- forecast ---');
                     console.log(response);
+                    $('#placeholder-text-h2').css('display', 'none');
+                    $('.forecast-card').css('display', 'unset');
+                    $('#forecast-weather-card-title').css('display', 'unset');
                 });
             });
         }else{
