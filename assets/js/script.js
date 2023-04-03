@@ -4,13 +4,42 @@ const APIKEY = 'd6d727c8c68c5cd31db30ad289ac8254';
 const LIMIT = '5';
 // Wrap code in a call to jQuery so all elments on the page will load before we do anything
 $(function(){
-    let weatherSearchHistory = []
-    // if search history is stored locally
-    if(localStorage.getItem('weatherSearchHistory')){
-        for(let searchItem of localStorage.getItem('weatherSearchHistory')){
-            weatherSearchHistory.push(searchItem);
-        }
+    let weatherSearchHistory = {
+        history: Array()
     }
+    if(localStorage.getItem('weatherSearchHistory')){
+        if(JSON.parse(localStorage.getItem('weatherSearchHistory'))['history'].length){
+            weatherSearchHistory['history'] = JSON.parse(localStorage.getItem('weatherSearchHistory'))['history'];
+        weatherSearchHistory['history'].forEach((historyItem) => {
+            $('.history-container').prepend($(
+                `<div class="history-item col-12 p-2">
+                    <button class="btn btn-secondary history-button col-12 
+                    index-${weatherSearchHistory['history'].indexOf(historyItem)}"
+                    >${historyItem}</button>
+                </div>`
+            ));
+        });
+        $('#placeholder-btn').attr('class', 'btn btn-danger col-12 clear-history');
+        $('#placeholder-btn').removeAttr('disabled');
+        $('#placeholder-btn').text('Clear History');
+        $('.clear-history').click(function(e){
+            e.preventDefault();
+            weatherSearchHistory = {
+                history: Array()
+            };
+            localStorage.setItem('weatherSearchHistory', JSON.stringify(weatherSearchHistory));
+            location.reload();
+        });
+        }
+    }else{
+        localStorage.setItem('weatherSearchHistory',JSON.stringify(weatherSearchHistory));
+    }
+    $('.history-button').click(function(e){
+        e.preventDefault();
+        console.log('yes');
+        $('#citySearch').val($(e.target).text());
+        $('#search-btn').trigger('click');
+    })
     $('#search-btn').click(function (e) { 
         e.preventDefault();
         var userSearchedCity = $('#citySearch').val();
@@ -26,8 +55,8 @@ $(function(){
                     return;
                 }
                 $('#citySearch').css('border', 'unset');
-                let lat = String(Number(response[1]['lat']).toFixed(2));
-                let lon = String(Number(response[1]['lon']).toFixed(2));
+                let lat = String(Number(response[0]['lat']).toFixed(2));
+                let lon = String(Number(response[0]['lon']).toFixed(2));
                 console.log('lat:'+lat + ' lon:' + lon);
                 // get 5 day forecast from Open Weather Map using lat, long, and the apikey
                 $.ajax({
@@ -65,9 +94,48 @@ $(function(){
                         $(card).children('.humidity').text(`Humidity: ${response['list'][(cardID*7)-3]['main']['humidity']} %`)
                     }
                 });
+                if(!weatherSearchHistory['history'].includes(userSearchedCity)){
+                    weatherSearchHistory['history'].unshift(userSearchedCity);
+                    if(weatherSearchHistory['history'].length > 10){
+                        weatherSearchHistory['history'].pop();
+                        $('.index-9').remove();
+                    }
+                    $('.history-container').prepend($(
+                    `<div class="history-item col-12 p-2">
+                        <button class="btn btn-secondary history-button col-12 index-${weatherSearchHistory['history'].indexOf(userSearchedCity)}"
+                        >${userSearchedCity}</button>
+                    </div>`
+                    ));
+                    $('.history-button').click(function(e){
+                        e.preventDefault();
+                        console.log('yes');
+                        $('#citySearch').val($(e.target).text());
+                        $('#search-btn').trigger('click');
+                    })
+                    localStorage.setItem('weatherSearchHistory', JSON.stringify(weatherSearchHistory))
+                    $('#placeholder-btn').attr('class', 'btn btn-danger col-12 clear-history');
+                    $('#placeholder-btn').removeAttr('disabled');
+                    $('#placeholder-btn').text('Clear History');
+                    $('.clear-history').click(function(e){
+                        e.preventDefault();
+                        weatherSearchHistory = {
+                            history: Array()
+                        };
+                        localStorage.setItem('weatherSearchHistory', JSON.stringify(weatherSearchHistory));
+                        location.reload();
+                    });
+                }
             });
         }else{
             $('#citySearch').css('border', 'var(--bs-danger) 2px solid');
         }
     });
 })
+// $('#placeholder-btn').click(function(e){
+//     e.preventDefault();
+//     weatherSearchHistory = {
+//         history: Array()
+//     };
+//     localStorage.setItem('weatherSearchHistory', JSON.stringify(weatherSearchHistory));
+//     location.reload();
+// });

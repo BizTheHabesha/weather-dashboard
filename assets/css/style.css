@@ -1,5 +1,7 @@
 :root{
     --std-background-color: rgba(0,0,0,0.1);
+    --weather-card-color: rgba(255, 255, 255, 0.4);
+    --gradient-contrast: white;
 }
 body{
     background-color: var(--std-background-color);
@@ -14,7 +16,7 @@ header{
         rgba(54,53,69,1) 0%, 
         rgba(114,144,152,1) 100%
         );
-    color: rgba(255, 255, 255, 0.4)
+    color: var(--gradient-contrast);
 }
 footer{
     width: 100%;
@@ -27,7 +29,14 @@ footer{
 .forecast-card{
     border: 1px solid var(--std-background-color);
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: var(--weather-card-color);
+    background: rgb(54,53,69);
+    background: linear-gradient(
+        50deg, 
+        rgba(54,53,69,1) 0%, 
+        rgba(114,144,152,1) 100%
+        );
+    color: var(--gradient-contrast);
     padding: 10px;
     margin: 10px;
     display:none;
@@ -38,7 +47,7 @@ footer{
 #current-weather-card{
     border: 1px solid var(--std-background-color);
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: var(--weather-card-color);
     padding: 10px;
     margin: 10px;
     display:none;
