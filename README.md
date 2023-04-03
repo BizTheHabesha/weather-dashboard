@@ -5,7 +5,7 @@
 ![Project Image](./assets/img/original-wireframe.png)
 
 ### Finished Product
-![Project Image](./assets/img/finished-product.jpg)
+![Project Image](./assets/img/finished-product.png)
 
 ---
 
