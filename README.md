@@ -35,7 +35,7 @@ A dashboard to check the weather for a city. The user can search for a city and 
 
 #### Deployment
 
-The website is deployed [here]().
+The website is deployed [here](https://bizthehabesha.github.io/weather-dashboard/).
 
 #### Installation
 
