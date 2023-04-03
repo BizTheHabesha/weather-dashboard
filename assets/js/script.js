@@ -94,6 +94,8 @@ $(function(){
                     $('#current-weather-card').css('display', 'flex');
                     // get date from dayjs and display in corresponding element
                     $('.city-date').text(`Weather in ${userSearchedCity} on ${dayjs().format('M/DD/YYYY')}`)
+                    // append the icon to the end of the date element
+                    $('.city-date').append($(`<img id="wicon" src="${"http://openweathermap.org/img/w/" + response['weather'][0]['icon'] + ".png"}" alt="Weather Icon">`))
                     // get temperature from OWM and display in corresponding element
                     $('#current-weather-card').children('.temp').text(`Temp: ${response['main']['temp']} °F`)
                     // get wind speed from OWM and display in corresponding element
@@ -121,6 +123,8 @@ $(function(){
                         cardID = Number($(card).attr('id').replace('forecast-weather-card-',''));
                         // get the date, then add days based on the the extracted id
                         $(card).children('.date').text(dayjs().add(cardID, 'day').format('M/DD/YYYY'));
+                        // append the icon to the end of the date element
+                        $(card).children('.date').append($(`<img id="wicon" src="${"http://openweathermap.org/img/w/" + response['list'][(cardID*7)-3]['weather'][0]['icon'] + ".png"}" alt="Weather Icon">`))
                         // get the temprature from OWM and dispaly in corresponding element
                         $(card).children('.temp').text(`Temp: ${Math.round(response['list'][(cardID*7)-3]['main']['temp'])} °F`)
                         // get the wind speed from OWM and display in coressponding element
