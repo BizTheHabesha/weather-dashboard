@@ -131,11 +131,3 @@ $(function(){
         }
     });
 })
-// $('#placeholder-btn').click(function(e){
-//     e.preventDefault();
-//     weatherSearchHistory = {
-//         history: Array()
-//     };
-//     localStorage.setItem('weatherSearchHistory', JSON.stringify(weatherSearchHistory));
-//     location.reload();
-// });
